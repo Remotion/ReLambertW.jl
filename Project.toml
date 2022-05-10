@@ -1,0 +1,8 @@
+name = "ReLambertW.jl"
+authors = ["I. Schulz (Remo)"]
+license = "MPL-2.0"
+desc = "Fast real valued Lambert W and Wright omega functions."
+version = "0.3"
+
+[compat]
+julia = "1.7"
