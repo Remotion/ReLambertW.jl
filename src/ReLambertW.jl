@@ -12,7 +12,7 @@ Constants: `omega`, `Ω`
 """
 module ReLambertW
 
-export lambertw0, lambertwm1, lambertw0_fast, lambertwm1_fast, omega, Ω
+export lambertw0, lambertwm1, lambertw0_fast, lambertwm1_fast, womega, omega, Ω
 
 # Halley’s method  https://file.scirp.org/pdf/AM_2013060409554653.pdf
 @inline function halley_lambertw(y ::T, x ::T) where T <: Number # 1*exp, 2*div, 4*mul
@@ -373,7 +373,7 @@ function womega(x ::BigFloat, maxiter=100) ::BigFloat
     x == Inf && return Inf;
     ep = 2*eps(BigFloat);
     x64 ::Float64 = Float64(x);
-    w64 ::Float64 = omega(x64);
+    w64 ::Float64 = womega(x64);
     w = big(w64);
     for i = 1:maxiter
         wₙ = fsc_womega(w, x);

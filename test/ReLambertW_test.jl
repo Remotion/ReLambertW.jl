@@ -4,6 +4,7 @@ include("../src/ReLambertW.jl")
 using .ReLambertW
 
 import .MathConstants.e
+import .MathConstants.pi
 
 @test lambertwm1(-1/e) == -1;
 @test lambertwm1(big(-1)/big(e)) == -1;
@@ -75,3 +76,26 @@ lambertw0(BigFloat(pi)) == BigFloat("1.07365819479614917209217840702482134754774
 6774999977546837967978607572802078218928250041977017117468185378390026")
 setprecision(256);
 
+
+#! Wright omega function Tests
+
+@test womega(0.0) == Float64(omega)
+@test womega(big(0.0)) == big(omega)
+
+@test womega(1.0f0) == 1.0f0
+@test womega(1.0) == 1.0
+@test womega(1) == 1
+@test womega(big(1.0)) == 1
+@test womega(big(1)) == 1
+
+@test womega(Float32(Inf)) == Inf
+@test womega(Float32(-Inf)) == 0
+@test womega(Float64(Inf)) == Inf
+@test womega(Float64(-Inf)) == 0
+@test womega(Inf) == Inf
+@test womega(-Inf) == 0
+@test womega(big(Inf)) == Inf
+@test womega(big(-Inf)) == 0
+
+@test womega(pi) ≈ lambertw0(exp(pi))
+@test womega(e) ≈ lambertw0(exp(e))
