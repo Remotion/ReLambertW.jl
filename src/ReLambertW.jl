@@ -6,7 +6,7 @@ This module also includes Wright omega function as well.
 Lambert W is the solution to the equation  w*exp(w) = x.
 Wright omega function is the solution to the equation y + ln(y) = x
 
-Functions: `lambertw0(z)`, `lambertwm1(z)`, `womega(z)`
+Functions: `lambertw0(z)`, `lambertwm1(z)`, `lambertw0_fast(z)`, `lambertwm1_fast(z)`, `womega(x)`
 Constants: `omega`, `Ω`
 
 """
@@ -385,11 +385,11 @@ function womega(x ::BigFloat, maxiter=100) ::BigFloat
     return w
 end
 
-womega(z ::Irrational)  = womega(float(z));
-womega(z ::Irrational, maxiter)  = womega(float(z), maxiter);
+womega(x ::Irrational)  = womega(float(x));
+womega(x ::Irrational, maxiter)  = womega(float(x), maxiter);
 
-womega(z ::Union{Integer, Rational})  = womega(float(z));
-womega(z ::Union{Integer, Rational}, maxiter)  = womega(float(z), maxiter);
+womega(x ::Union{Integer, Rational})  = womega(float(x));
+womega(x ::Union{Integer, Rational}, maxiter)  = womega(float(x), maxiter);
 
 #! Omega Ω constant
 

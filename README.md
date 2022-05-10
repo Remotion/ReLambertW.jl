@@ -4,8 +4,9 @@
 
 [Wright omega function](https://en.wikipedia.org/wiki/Wright_omega_function)
 
-Julia module to compute real Lambert-W Function also known as product-log.
-This module also includes Wright omega function as well.
+Julia module to compute real valued Lambert-W Function also known as product-log.
+
+Fast real valued Wright omega function is include as well.
 
 Lambert W is the solution to the equation  w*exp(w) = x.
 
@@ -42,3 +43,12 @@ julia> womega(987) + log(womega(987))
 julia> womega(big(987)) + log(womega(big(987)))
 987.0  
 ```
+
+
+## References ##
+
+
+* Toshio Fukushima 2020 [Precise and fast computation of Lambert W function by piecewise minimax rational function approximation with variable transformation](https://www.researchgate.net/publication/346309410_Precise_and_fast_computation_of_Lambert_W_function_by_piecewise_minimax_rational_function_approximation_with_variable_transformation)
+
+* Toshio Fukushima 2020 [Fast computation of Wright ω function by piecewise minimax rational function approximation](https://www.researchgate.net/publication/345000961_Fast_computation_of_Wright_o_function_by_piecewise_minimax_rational_function_approximation)
+
