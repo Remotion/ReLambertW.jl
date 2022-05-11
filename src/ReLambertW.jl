@@ -426,6 +426,11 @@ lambertwm1(z ::Irrational, maxiter)  = lambertwm1(float(z), maxiter);
 lambertwm1(z ::Union{Integer, Rational})  = lambertwm1(float(z));
 lambertwm1(z ::Union{Integer, Rational}, maxiter)  = lambertwm1(float(z), maxiter);
 
+# k-th branch of the Lambert W function. Only accept k = 0 and k = -1 for now!
+function lambertw(z, k=0) 
+    (k == 0) && return lambertw0(z);
+    (k == -1) && return lambertwm1(z);
+end
 
 #! Wright omega function
 

@@ -18,6 +18,10 @@ Constants: `omega`, `Ω`
 ## Examples ##
 
 ```julia
+julia> W₀(x) = lambertw0(x);
+julia> W₋₁(x) = lambertwm1(x);
+julia> ω(x) = womega(x);
+
 julia> womega(0)
 0.5671432904097838
 
