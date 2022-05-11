@@ -15,18 +15,18 @@ import .MathConstants.pi
 @test lambertw0(2*exp(2)) == 2
 @test lambertw0(2*exp(big(2))) == 2
 
-function test_iter_1(T)
+function lambertw0_test_iter_1(T)
     for i = 1:700
         ti = T(i)
         lambertw0(ti*exp(ti)) != i && return false;
     end
     return true
 end
-@test test_iter_1(Float64)
-@test test_iter_1(BigFloat)
+@test lambertw0_test_iter_1(Float64)
+@test lambertw0_test_iter_1(BigFloat)
 
 
-function test_iter_2(T)
+function lambertw0_test_iter_2(T)
     for i = 1:700
         ti = T(1)/T(i);
         w = lambertw0(ti*exp(ti));
@@ -37,8 +37,8 @@ function test_iter_2(T)
     end
     return true
 end
-@test test_iter_2(Float64)
-@test test_iter_2(BigFloat)
+@test lambertw0_test_iter_2(Float64)
+@test lambertw0_test_iter_2(BigFloat)
 
 @test lambertw0(1/8*exp(1/8)) ≈ 1/8
 @test lambertw0(big(1)/8*exp(big(1)/8)) == 1/8
@@ -71,9 +71,9 @@ end
 @test lambertw0(BigFloat(pi))*exp(lambertw0(BigFloat(pi))) == BigFloat(pi)
 
 setprecision(512);
-lambertw0(BigFloat(pi)) == BigFloat("1.07365819479614917209217840702482134754774535041031453138052553960377\
+@test lambertw0(BigFloat(pi)) == BigFloat("1.07365819479614917209217840702482134754774535041031453138052553960377\
 2912749810400238657539543107021745350480054282507202230659920022936523\
-6774999977546837967978607572802078218928250041977017117468185378390026")
+6774999977546837967978607572802078218928250041977017117468185378390026");
 setprecision(256);
 
 
@@ -99,3 +99,41 @@ setprecision(256);
 
 @test womega(pi) ≈ lambertw0(exp(pi))
 @test womega(e) ≈ lambertw0(exp(e))
+
+function womega_vs_lambertw0_test_1(T, niters )
+    ep = eps(T)*4;
+    for v = rand(T, niters) * 708 # exp() may overflow if we use bigger values here.
+        !isapprox(womega(v), lambertw0(exp(v)), rtol=ep) && return false;
+    end
+    return true
+end
+
+@test womega_vs_lambertw0_test_1(Float64, 100_000)
+@test womega_vs_lambertw0_test_1(BigFloat, 1000)
+
+function womega_vs_lambertw0_test_2(T, niters )
+    ep = eps(T)*4;
+    for v = rand(T, niters) * 708 .+ 1
+        iv = 1/v;
+        if !isapprox(womega(iv), lambertw0(exp(iv)), rtol=ep)
+            println(iv, "  " ,v,"  ", womega(iv) / lambertw0(exp(iv)));
+            return false;
+        end
+    end
+    return true
+end
+
+@test womega_vs_lambertw0_test_2(Float64, 100_000)
+@test womega_vs_lambertw0_test_2(BigFloat, 1000)
+
+# short function names.
+W₀(x)  = lambertw0(x);
+W₋₁(x) = lambertwm1(x);
+ω(x)   = womega(x);
+
+@test W₀(0) == 0
+@test W₀(-1/e) == -1
+@test W₀(2*log(2)) == log(2)
+
+@test ω(0) == W₀(1)
+@test ω(1) == 1
