@@ -88,6 +88,9 @@ setprecision(256);
 @test womega(big(1.0)) == 1
 @test womega(big(1)) == 1
 
+@test womega(Float32(-2.0)) < womega(Float32(-1.0))
+@test womega(Float64(-2.0)) < womega(Float64(-1.0))
+
 @test womega(Float32(Inf)) == Inf
 @test womega(Float32(-Inf)) == 0
 @test womega(Float64(Inf)) == Inf

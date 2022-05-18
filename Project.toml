@@ -3,7 +3,7 @@ uuid = "8f5a32f4-3b74-42d7-ab78-165b0add7fed"
 authors = ["I. Schulz (Remo)"]
 license = "MPL-2.0"
 desc = "Fast real valued Lambert W and Wright omega functions."
-version = "0.3.0"
+version = "0.3.5"
 
 [compat]
 julia = "1.7"
