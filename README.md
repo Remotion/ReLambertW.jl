@@ -15,6 +15,18 @@ Wright omega function is the solution to the equation y + ln(y) = x
 Functions: `lambertw0(z)`, `lambertwm1(z)`, `womega(z)`
 Constants: `omega`, `Ω`
 
+## Math ##
+
+$$x^x = c 
+\ \ \ \ \ \
+x = \exp(W_{0}(\ln(c)))$$
+
+$$
+x^\sqrt[n]{x} = c
+\ \ \ \ \ \
+x = \exp\left( nW_{0}(\frac{\ln(c)}{n}) \right)
+$$
+
 ## Examples ##
 
 ```julia
